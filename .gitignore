@@ -38,10 +38,8 @@ Thumbs.db
 
 # Specific large file or directory
 
-Dataset/
-lyric_data_for_CL_no_id.jsonl
-test_data.jsonl
-train_data.jsonl
-validation_data.jsonl
-
+ft-glm3/finetune_chatmodel_demo/formatted_data/lyric_data_for_CL_no_id.jsonl
+ft-glm3/finetune_chatmodel_demo/formatted_data/test_data.jsonl
+ft-glm3/finetune_chatmodel_demo/formatted_data/train_data.jsonl
+ft-glm3/finetune_chatmodel_demo/formatted_data/validation_data.jsonl
 # Add here other files/directories you want to ignore.
