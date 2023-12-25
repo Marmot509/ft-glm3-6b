@@ -3,23 +3,10 @@ import random
 
 # Function to transform data format
 def transform_data(data):
-    transformed_data = {"conversations": []}
-
-    # Add user prompt
-    user_prompt = {
-        "role": "user",
-        "content": "请续写歌词，第一句为：{}".format(data["lyric"][0])
+    return {
+        "prompt": "请续写歌词，第一句为：{}".format(data["lyric"][0]),
+        "response": "，".join(data["lyric"]) + "。"
     }
-    transformed_data["conversations"].append(user_prompt)
-
-    # Add assistant response
-    assistant_response = {
-        "role": "assistant",
-        "content": "，".join(data["lyric"]) + "。"
-    }
-    transformed_data["conversations"].append(assistant_response)
-
-    return transformed_data
 
 # Function to read data from the file
 def read_data(file_path):
