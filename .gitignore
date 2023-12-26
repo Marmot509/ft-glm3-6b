@@ -1,0 +1,45 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source because
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Specific large file or directory
+
+ft-glm3/finetune_chatmodel_demo/formatted_data/lyric_data_for_CL_no_id.jsonl
+ft-glm3/finetune_chatmodel_demo/formatted_data/test_data.jsonl
+ft-glm3/finetune_chatmodel_demo/formatted_data/train_data.jsonl
+ft-glm3/finetune_chatmodel_demo/formatted_data/validation_data.jsonl
+# Add here other files/directories you want to ignore.
