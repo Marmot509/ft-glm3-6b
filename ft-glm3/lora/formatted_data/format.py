@@ -5,7 +5,7 @@ import random
 def transform_data(data):
     return {
         "context": "请续写歌词，第一句为：{}".format(data["lyric"][0]),
-        "response": "，".join(data["lyric"]) + "。"
+        "target": "，".join(data["lyric"]) + "。"
     }
 
 # Function to read data from the file
