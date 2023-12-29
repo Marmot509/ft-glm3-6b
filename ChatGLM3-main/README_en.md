@@ -16,7 +16,7 @@ ChatGLM3 is a new generation of pre-trained dialogue models jointly released by 
 
 1. **Stronger Base Model:** The base model of ChatGLM3-6B, ChatGLM3-6B-Base, adopts a more diverse training dataset, more sufficient training steps, and a more reasonable training strategy. Evaluations on datasets from various perspectives such as semantics, mathematics, reasoning, code, and knowledge show that **ChatGLM3-6B-Base has the strongest performance among base models below 10B**.
 
-2. **More Complete Function Support:** ChatGLM3-6B adopts a newly designed [Prompt format](PROMPT_en.md), supporting multi-turn dialogues as usual. It also natively supports [tool invocation](tool_using/README_en.md) (Function Call), code execution (Code Interpreter), and Agent tasks in complex scenarios.
+2. **More Complete Function Support:** ChatGLM3-6B adopts a newly designed [Prompt format](PROMPT_en.md), supporting multi-turn dialogues as usual. It also natively supports [tool invocation](tools_using_demo/README_en.md) (Function Call), code execution (Code Interpreter), and Agent tasks in complex scenarios.
 
 3. **More Comprehensive Open-source Series:** In addition to the dialogue model [ChatGLM3-6B](https://huggingface.co/THUDM/chatglm3-6b), the basic model [ChatGLM3-6B-Base](https://huggingface.co/THUDM/chatglm3-6b-base), and the long-text dialogue model [ChatGLM3-6B-32K](https://huggingface.co/THUDM/chatglm3-6b-32k) have also been open-sourced. All these weights are **fully open** for academic research, and **free commercial use is also allowed** after registration via a [questionnaire](https://open.bigmodel.cn/mla/form).
 
@@ -38,6 +38,7 @@ Although every effort has been made to ensure the compliance and accuracy of the
 Open source projects that accelerate ChatGLM3:
 * [chatglm.cpp](https://github.com/li-plus/chatglm.cpp): Real-time inference on your laptop accelerated by quantization, similar to llama.cpp.
 * [ChatGLM3-TPU](https://github.com/sophgo/ChatGLM3-TPU): Using the TPU accelerated inference solution, it runs about 7.5 token/s in real time on the end-side chip BM1684X (16T@FP16, 16G DDR).
+* [TensorRT-LLM](https://github.com/NVIDIA/TensorRT-LLM/tree/main): A high-performance GPU-accelerated inference solution developed by NVIDIA, you can refer to these [steps](./tensorrt_llm_demo/README.md) to deploy ChatGLM3.
 
 ## Evaluation Results
 
@@ -159,7 +160,7 @@ python cli_demo.py
 
 The program will interact in the command line, enter instructions in the command line and hit enter to generate a response. Enter `clear` to clear the dialogue history, enter `stop` to terminate the program.
 
-### API Deployment
+### OpenAI API Demo
 Thanks to [@xusenlinzy](https://github.com/xusenlinzy) for implementing the OpenAI format streaming API deployment, which can serve as the backend for any ChatGPT-based application, such as [ChatGPT-Next-Web](https://github.com/Yidadaa/ChatGPT-Next-Web). You can deploy it by running [openai_api.py](openai_api_demo/openai_api.py) in the repository:
 ```shell
 cd openai_api_demo
@@ -181,7 +182,7 @@ If the test is successful, the model should return a story.
 
 ### Tool Invocation
 
-For methods of tool invocation, please refer to [Tool Invocation](tool_using/README_en.md).
+For methods of tool invocation, please refer to [Tool Invocation](tools_using_demo/README_en.md).
 
 ## Low-Cost Deployment
 
@@ -218,6 +219,11 @@ Loading the half-precision ChatGLM3-6B model requires about 13GB of memory. Mach
 ### Multi-GPU Deployment
 
 If you have multiple GPUs, but each GPU's VRAM size is not enough to accommodate the complete model, then the model can be split across multiple GPUs. First, install accelerate: `pip install accelerate`, and then load the model as usual.
+
+### TensorRT-LLM Demo
+
+ChatGLM3-6B now supports accelerated inference using the TensorRT-LLM toolkit, significantly improving model inference speed. For specific usage, please refer to the [TensorRT-LLM Demo](tensorrt_llm_demo/tensorrt_llm_cli_demo.py) and the official technical documentation.
+
 ## Citation
 
 If you find our work helpful, please consider citing the following papers.
