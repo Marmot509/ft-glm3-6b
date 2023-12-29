@@ -2,16 +2,17 @@
 
 set -ex
 
-LR=1.0014e-4
+LR=1e-4
 NUM_GPUS=1
-LORA_RANK=128
-LORA_ALPHA=256
-LORA_DROPOUT=0.1
+LORA_RANK=8
+LORA_ALPHA=16
+LORA_DROPOUT=0.2
+WARMUP_STEPS=100
 
 MAX_SOURCE_LEN=256
-MAX_TARGET_LEN=2048
-DEV_BATCH_SIZE=1
-GRAD_ACCUMULARION_STEPS=8
+MAX_TARGET_LEN=1024
+DEV_BATCH_SIZE=2
+GRAD_ACCUMULARION_STEPS=4
 MAX_STEP=5000
 SAVE_INTERVAL=200
 
@@ -30,6 +31,7 @@ torchrun --standalone --nnodes=1 --nproc_per_node=$NUM_GPUS finetune.py \
     --lora_rank $LORA_RANK \
     --lora_alpha $LORA_ALPHA \
     --lora_dropout $LORA_DROPOUT \
+    --warmup_steps $WARMUP_STEPS \
     --max_source_length $MAX_SOURCE_LEN \
     --max_target_length $MAX_TARGET_LEN \
     --preprocessing_num_workers 1 \
@@ -38,7 +40,8 @@ torchrun --standalone --nnodes=1 --nproc_per_node=$NUM_GPUS finetune.py \
     --per_device_train_batch_size $DEV_BATCH_SIZE \
     --gradient_accumulation_steps $GRAD_ACCUMULARION_STEPS \
     --max_steps $MAX_STEP \
+    --quantization_bit 4 \
     --logging_steps 1 \
     --save_steps $SAVE_INTERVAL \
-    --learning_rate $LR  2>&1 | tee ${OUTPUT_DIR}/train.log
+    --learning_rate $LR  2>&1 | tee ${OUTPUT_DIR}/train.log 
 
