@@ -40,7 +40,6 @@ torchrun --standalone --nnodes=1 --nproc_per_node=$NUM_GPUS finetune.py \
     --per_device_train_batch_size $DEV_BATCH_SIZE \
     --gradient_accumulation_steps $GRAD_ACCUMULARION_STEPS \
     --max_steps $MAX_STEP \
-    --quantization_bit 4 \
     --logging_steps 1 \
     --save_steps $SAVE_INTERVAL \
     --learning_rate $LR  2>&1 | tee ${OUTPUT_DIR}/train.log 
