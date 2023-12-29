@@ -2,7 +2,7 @@
 
 set -ex
 
-LR=5e-4
+LR=5e-5
 NUM_GPUS=1
 LORA_RANK=8
 LORA_ALPHA=16
