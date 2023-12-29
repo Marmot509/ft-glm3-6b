@@ -37,7 +37,7 @@ ehthumbs.db
 Thumbs.db
 
 # Specific large file or directory
-
+ft-glm3/lora/formatted_data/lyric_data_for_CL_no_id.jsonl
 ft-glm3/finetune_chatmodel_demo/formatted_data/lyric_data_for_CL_no_id.jsonl
 ft-glm3/finetune_chatmodel_demo/formatted_data/test_data.jsonl
 ft-glm3/finetune_chatmodel_demo/formatted_data/train_data.jsonl
