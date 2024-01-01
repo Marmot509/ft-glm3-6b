@@ -49,8 +49,10 @@ original_data = read_data(file_path)
 
 # Splitting the data
 train_data, validation_data, test_data = split_data(original_data)
+mini_train_data = train_data[:100]  # Taking a small subset of the training data
 
 # Saving the transformed data
 save_transformed_data(train_data, 'train_data.jsonl')
 save_transformed_data(validation_data, 'validation_data.jsonl')
 save_transformed_data(test_data, 'test_data.jsonl')
+save_transformed_data(mini_train_data, 'mini_train_data.jsonl')

@@ -3,7 +3,7 @@
 set -ex
 
 LR=1e-4
-NUM_GPUS=4
+NUM_GPUS=1
 LORA_RANK=8
 LORA_ALPHA=32
 LORA_DROUPOUT=0.1
@@ -17,7 +17,7 @@ SAVE_INTERVAL=500
 
 RUN_NAME=text
 BASE_MODEL_PATH=THUDM/chatglm3-6b-base
-DATASET_PATH=data/alpaca_data.jsonl
+DATASET_PATH=data/train_data.json
 DATESTR=`date +%Y%m%d-%H%M%S`
 OUTPUT_DIR=output/${RUN_NAME}-${DATESTR}-${LR}
 MASTER_PORT=$(shuf -n 1 -i 10000-65535)
