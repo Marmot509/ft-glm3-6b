@@ -49,7 +49,7 @@ original_data = read_data(file_path)
 
 # Splitting the data
 train_data, validation_data, test_data = split_data(original_data)
-mini_train_data = train_data[:100]  # Taking a small subset of the training data
+mini_train_data = train_data[:1000]  # Taking a small subset of the training data
 mini_val_data = validation_data[:100]  # Taking a small subset of the validation data
 
 # Saving the transformed data
