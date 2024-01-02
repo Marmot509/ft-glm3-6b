@@ -24,21 +24,11 @@ DATESTR=`date +%Y%m%d-%H%M%S`
 OUTPUT_DIR=output/${RUN_NAME}-${DATESTR}-${LR}
 MASTER_PORT=$(shuf -n 1 -i 10000-65535)
 
-### modify eval parameters by Xin
-EVAL_STRATEGY=steps
-EVAL_STEPS=20
-EVAL_BATCH_SIZE=5
-
-
 mkdir -p $OUTPUT_DIR
 
 torchrun --standalone --nnodes=1 --nproc_per_node=$NUM_GPUS finetune.py \
     --train_format input-output \
     --train_file $TRAINSET_PATH \
-    --evaluation_strategy $EVAL_STRATEGY \
-    --val_file $VALSET_PATH \
-    --eval_steps $EVAL_STEPS \
-    --per_device_eval_batch_size $EVAL_BATCH_SIZE \
     --lora_rank $LORA_RANK \
     --lora_alpha $LORA_ALPHA \
     --lora_dropout $LORA_DROPOUT \
