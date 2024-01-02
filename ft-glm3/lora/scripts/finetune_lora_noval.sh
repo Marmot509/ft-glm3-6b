@@ -32,6 +32,7 @@ torchrun --standalone --nnodes=1 --nproc_per_node=$NUM_GPUS finetune.py \
     --lora_rank $LORA_RANK \
     --lora_alpha $LORA_ALPHA \
     --lora_dropout $LORA_DROPOUT \
+    --val_file $VALSET_PATH \
     --warmup_steps $WARMUP_STEPS \
     --max_source_length $MAX_SOURCE_LEN \
     --max_target_length $MAX_TARGET_LEN \
