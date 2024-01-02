@@ -43,10 +43,10 @@ logger = logging.getLogger(__name__)
 
 
 def main():
-    parser = HfArgumentParser((ModelArguments, DataTrainingArguments, Seq2SeqTrainingArguments))
-    if len(sys.argv) == 2 and sys.argv[1].endswith(".json"):
+    parser = HfArgumentParser((ModelArguments, DataTrainingArguments, Seq2SeqTrainingArguments))    # 定义参数解析器
+    if len(sys.argv) == 2 and sys.argv[1].endswith(".json"):    # 如果只有两个参数且第二个参数以.json结束，则使用json文件解析参数
         model_args, data_args, training_args = parser.parse_json_file(json_file=os.path.abspath(sys.argv[1]))
-    else:
+    else:   # 否则使用命令行解析参数
         model_args, data_args, training_args = parser.parse_args_into_dataclasses()
 
     training_args.ddp_find_unused_parameters = False
@@ -103,6 +103,24 @@ def main():
     print(f"Train dataset size: {len(train_dataset)}")
     sanity_check(train_dataset[0]['input_ids'], train_dataset[0]['labels'], tokenizer)
 
+    ### Add validation data loading by Xin
+    with open(data_args.val_file, "r", encoding="utf-8") as f:
+        if data_args.val_file.endswith(".json"):
+            val_data = json.load(f)
+        elif data_args.val_file.endswith(".jsonl"):
+            val_data = [json.loads(line) for line in f]
+
+    if data_args.train_format == "input-output":
+        val_dataset = InputOutputDataset(
+            val_data,
+            tokenizer,
+            data_args.max_source_length,
+            data_args.max_target_length,
+        )
+    else:
+        raise ValueError(f"Unknown train format: {data_args.train_format}")
+    print(f"Validation dataset size: {len(train_dataset)}")
+
     peft_config = LoraConfig(
         task_type=TaskType.CAUSAL_LM,
         inference_mode=False,
@@ -126,6 +144,7 @@ def main():
         model=model,
         args=training_args,
         train_dataset=train_dataset,
+        eval_dataset=val_dataset,
         tokenizer=tokenizer,
         data_collator=data_collator,
     )
