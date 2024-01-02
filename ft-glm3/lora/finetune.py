@@ -144,7 +144,7 @@ def main():
         model=model,
         args=training_args,
         train_dataset=train_dataset,
-        eval_dataset=val_dataset,
+        eval_dataset=val_dataset, ### add eval dataset to trainer by Xin
         tokenizer=tokenizer,
         data_collator=data_collator,
     )
