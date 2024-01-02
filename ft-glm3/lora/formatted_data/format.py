@@ -4,8 +4,8 @@ import random
 # Function to transform data format
 def transform_data(data):
     return {
-        "context": "，".join(data["lyric"][:2]) + "，",
-        "target": "，".join(data["lyric"][3:]) + "。"
+        "context": "，".join(data["lyric"][:10]) + "，",
+        "target": "，".join(data["lyric"][11:]) + "。"
     }
 
 # Function to read data from the file
