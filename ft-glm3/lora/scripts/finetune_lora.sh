@@ -10,10 +10,11 @@ LORA_DROPOUT=0.1
 WARMUP_STEPS=0
 
 MAX_SOURCE_LEN=256
-MAX_TARGET_LEN=768
-DEV_BATCH_SIZE=2
-GRAD_ACCUMULARION_STEPS=5
-MAX_STEP=5000
+MAX_TARGET_LEN=128
+DEV_BATCH_SIZE=16
+GRAD_ACCUMULARION_STEPS=4
+# MAX_STEP=5000
+NUM_Epochs=10
 SAVE_INTERVAL=200
 
 RUN_NAME=lora-lyrics
@@ -25,19 +26,19 @@ OUTPUT_DIR=output/${RUN_NAME}-${DATESTR}-${LR}
 MASTER_PORT=$(shuf -n 1 -i 10000-65535)
 
 ### modify eval parameters by Xin
-EVAL_STRATEGY=steps
-EVAL_STEPS=10
-EVAL_BATCH_SIZE=5
+# EVAL_STRATEGY=steps
+# EVAL_STEPS=20
+# EVAL_BATCH_SIZE=5
 
 mkdir -p $OUTPUT_DIR
 
 torchrun --standalone --nnodes=1 --nproc_per_node=$NUM_GPUS finetune.py \
     --train_format input-output \
     --train_file $TRAINSET_PATH \
-    --evaluation_strategy $EVAL_STRATEGY \
+#    --evaluation_strategy $EVAL_STRATEGY \
     --val_file $VALSET_PATH \
-    --eval_steps $EVAL_STEPS \
-    --per_device_eval_batch_size $EVAL_BATCH_SIZE \
+#    --eval_steps $EVAL_STEPS \
+#    --per_device_eval_batch_size $EVAL_BATCH_SIZE \
     --lora_rank $LORA_RANK \
     --lora_alpha $LORA_ALPHA \
     --lora_dropout $LORA_DROPOUT \
@@ -49,7 +50,8 @@ torchrun --standalone --nnodes=1 --nproc_per_node=$NUM_GPUS finetune.py \
     --output_dir $OUTPUT_DIR \
     --per_device_train_batch_size $DEV_BATCH_SIZE \
     --gradient_accumulation_steps $GRAD_ACCUMULARION_STEPS \
-    --max_steps $MAX_STEP \
+#    --max_steps $MAX_STEP \
+    --num_train_epochs $NUM_Epochs \
     --logging_steps 1 \
     --save_steps $SAVE_INTERVAL \
     --learning_rate $LR  2>&1 | tee ${OUTPUT_DIR}/train.log 
