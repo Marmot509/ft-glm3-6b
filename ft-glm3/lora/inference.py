@@ -24,7 +24,7 @@ if args.tokenizer is None:
 
 # Model and Tokenizer Configuration
 tokenizer = AutoTokenizer.from_pretrained("THUDM/chatglm3-6b-base", trust_remote_code=True)
-model = AutoModel.from_pretrained(args.model, load_in_8bit=False, trust_remote_code=True, device_map="auto").to(
+model = AutoModel.from_pretrained("THUDM/chatglm3-6b-base", load_in_8bit=False, trust_remote_code=True, device_map="auto").to(
     args.device)
 
 # LoRA Model Configuration
