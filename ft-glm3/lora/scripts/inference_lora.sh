@@ -16,5 +16,6 @@ python inference.py \
     --lora-alpha $LORA_ALPHA \
     --lora-dropout $LORA_DROPOUT \
     --lora-path $LORA_PATH \
+    --tokenizer THUDM/chatglm3-6b \
     --max-new-tokens $MAX_TOKENS 
 
