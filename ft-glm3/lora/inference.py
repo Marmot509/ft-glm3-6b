@@ -24,8 +24,7 @@ if args.tokenizer is None:
 
 # Model and Tokenizer Configuration
 tokenizer = AutoTokenizer.from_pretrained(args.tokenizer, trust_remote_code=True)
-model = AutoModel.from_pretrained(args.model, load_in_8bit=True, trust_remote_code=True, device_map="auto").to(
-    args.device)
+model = AutoModel.from_pretrained(args.model, load_in_8bit=True, trust_remote_code=True, device_map="auto")
 
 # LoRA Model Configuration
 peft_config = LoraConfig(
