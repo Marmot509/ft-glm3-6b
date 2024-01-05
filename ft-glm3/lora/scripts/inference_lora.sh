@@ -6,7 +6,9 @@ LORA_RANK=8
 LORA_ALPHA=16
 LORA_DROPOUT=0.1
 MAX_TOKENS=1024
-LORA_PATH=output/lora-lyrics-20231229-062839-1e-4/checkpoint-200/
+LORA_PATH=output/lora-lyrics-20240103-072747-1e-4/checkpoint-1600/
+
+
 
 
 python inference.py \
