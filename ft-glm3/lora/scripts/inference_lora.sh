@@ -18,7 +18,7 @@ python inference.py \
     --lora-alpha $LORA_ALPHA \
     --lora-dropout $LORA_DROPOUT \
     --lora-path $LORA_PATH \
-    --max-new-tokens $MAX_TOKENS 
-    --model $MODEL
+    --max-new-tokens $MAX_TOKENS \
+    --model $MODEL \
     --tokenizer $TOKENIZER
 
