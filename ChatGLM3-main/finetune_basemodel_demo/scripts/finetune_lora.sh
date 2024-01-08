@@ -33,7 +33,7 @@ mkdir -p $OUTPUT_DIR
 
 torchrun --standalone --nnodes=1 --nproc_per_node=$NUM_GPUS finetune.py \
     --train_format input-output \
-    --train_file $DATASET_PATH \
+    --train_file $TRAINSET_PATH \
     --lora_rank $LORA_RANK \
     --lora_alpha $LORA_ALPHA \
     --lora_dropout $LORA_DROUPOUT \
