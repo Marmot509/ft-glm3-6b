@@ -103,6 +103,24 @@ def main():
     print(f"Train dataset size: {len(train_dataset)}")
     sanity_check(train_dataset[0]['input_ids'], train_dataset[0]['labels'], tokenizer)
 
+### Add validation data loading by Xin
+    with open(data_args.val_file, "r", encoding="utf-8") as f:
+        if data_args.val_file.endswith(".json"):
+            val_data = json.load(f)
+        elif data_args.val_file.endswith(".jsonl"):
+            val_data = [json.loads(line) for line in f]
+
+    if data_args.train_format == "input-output":
+        val_dataset = InputOutputDataset(
+            val_data,
+            tokenizer,
+            data_args.max_source_length,
+            data_args.max_target_length,
+        )
+    else:
+        raise ValueError(f"Unknown train format: {data_args.train_format}")
+    print(f"Validation dataset size: {len(train_dataset)}")
+
     peft_config = LoraConfig(
         task_type=TaskType.CAUSAL_LM,
         inference_mode=False,
@@ -126,6 +144,7 @@ def main():
         model=model,
         args=training_args,
         train_dataset=train_dataset,
+        eval_dataset=val_dataset, ### add eval dataset to trainer by Xin
         tokenizer=tokenizer,
         data_collator=data_collator,
     )
