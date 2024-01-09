@@ -10,6 +10,7 @@ DEV_BATCH_SIZE=4
 GRAD_ACCUMULARION_STEPS=4
 NUM_Epochs=2
 SAVE_INTERVAL=500
+WARMUP_STEPS=0
 
 RUN_NAME=fpft_lyrics
 BASE_MODEL_PATH=THUDM/chatglm3-6b
@@ -30,7 +31,11 @@ mkdir -p $OUTPUT_DIR
 
 torchrun --standalone --nnodes=1 --nproc_per_node=$NUM_GPUS finetune.py \
     --train_format input-output \
-    --train_file $DATASET_PATH \
+    --train_file $TRAINSET_PATH \
+    --evaluation_strategy $EVAL_STRATEGY \
+    --val_file $VALSET_PATH \
+    --eval_steps $EVAL_STEPS \
+    --per_device_eval_batch_size $EVAL_BATCH_SIZE \
     --preprocessing_num_workers 1 \
     --model_name_or_path $BASE_MODEL_PATH \
     --output_dir $OUTPUT_DIR \
@@ -38,7 +43,7 @@ torchrun --standalone --nnodes=1 --nproc_per_node=$NUM_GPUS finetune.py \
     --max_target_length $MAX_TARGET_LEN \
     --per_device_train_batch_size $DEV_BATCH_SIZE \
     --gradient_accumulation_steps $GRAD_ACCUMULARION_STEPS \
-    --max_steps $MAX_STEP \
+    --num_train_epochs $NUM_Epochs \
     --logging_steps 1 \
     --save_steps $SAVE_INTERVAL \
     --learning_rate $LR \
