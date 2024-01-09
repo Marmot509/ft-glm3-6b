@@ -16,7 +16,8 @@ def transform_and_split_data(original_file_path, train_path, val_path, test_path
     # 计算分割点
     total_size = len(transformed_data)
     train_size = int(total_size * train_ratio)
-    val_size = int(total_size * val_ratio)
+    #val_size = int(total_size * val_ratio)
+    val_size = 100
 
     # 分割数据集
     train_data = transformed_data[:train_size]
