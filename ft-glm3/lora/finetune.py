@@ -118,8 +118,8 @@ def main():
             data_args.max_target_length,
         )
     else:
-        raise ValueError(f"Unknown train format: {data_args.train_format}")
-    print(f"Validation dataset size: {len(train_dataset)}")
+        raise ValueError(f"Unknown validation format: {data_args.train_format}")
+    print(f"Validation dataset size: {len(val_dataset)}")
 
     peft_config = LoraConfig(
         task_type=TaskType.CAUSAL_LM,
