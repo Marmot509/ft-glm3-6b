@@ -43,7 +43,6 @@ from preprocess_utils import sanity_check, MultiTurnDataset, InputOutputDataset
 
 logger = logging.getLogger(__name__)
 
-
 def main():
     parser = HfArgumentParser((ModelArguments, DataTrainingArguments, Seq2SeqTrainingArguments))
     if len(sys.argv) == 2 and sys.argv[1].endswith(".json"):

@@ -9,7 +9,7 @@ parser.add_argument("--model", type=str, default=None, help="main model weights"
 parser.add_argument("--tokenizer", type=str, default=None, help="main model weights")
 parser.add_argument("--pt-pre-seq-len", type=int, default=128, help="The pre-seq-len used in p-tuning")
 parser.add_argument("--device", type=str, default="cuda")
-parser.add_argument("--max-new-tokens", type=int, default=128)
+parser.add_argument("--max-new-tokens", type=int, default=512)
 
 args = parser.parse_args()
 
@@ -36,6 +36,12 @@ while True:
     prompt = input("Prompt:")
     inputs = tokenizer(prompt, return_tensors="pt")
     inputs = inputs.to(args.device)
-    response = model.generate(input_ids=inputs["input_ids"], max_length=inputs["input_ids"].shape[-1] + args.max_new_tokens)
+    response = model.generate(
+        input_ids=inputs["input_ids"], 
+        max_length=inputs["input_ids"].shape[-1] + args.max_new_tokens,
+        num_beams=10,
+        no_repeat_ngram_size=2,
+        repetition_penalty=1.5,
+        )
     response = response[0, inputs["input_ids"].shape[-1]:]
     print("Response:", tokenizer.decode(response, skip_special_tokens=True))

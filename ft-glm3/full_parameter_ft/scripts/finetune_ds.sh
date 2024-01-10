@@ -48,5 +48,5 @@ torchrun --standalone --nnodes=1 --nproc_per_node=$NUM_GPUS finetune.py \
     --save_steps $SAVE_INTERVAL \
     --learning_rate $LR \
     --fp16 \
-    --quantization_bit 8 \
+    --quantization_bit 8\
     --deepspeed configs/deepspeed.json 2>&1 | tee ${OUTPUT_DIR}/train.log
