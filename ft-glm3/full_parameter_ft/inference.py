@@ -40,7 +40,7 @@ while True:
         input_ids=inputs["input_ids"], 
         max_length=inputs["input_ids"].shape[-1] + args.max_new_tokens,
         num_beams=3,
-        no_repeat_ngram_size=3,
+        no_repeat_ngram_size=2,
         repetition_penalty=1.5,
         )
     response = response[0, inputs["input_ids"].shape[-1]:]
